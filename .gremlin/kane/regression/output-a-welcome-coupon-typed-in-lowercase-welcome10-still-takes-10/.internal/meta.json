@@ -1,0 +1,18 @@
+{
+  "commit_id": "c4cc7f50-4a8d-4866-b655-3046fdf10285",
+  "test_id": "0c54ebce-1eaf-4741-b5f0-2afbe72a5bab",
+  "testcase_id": "01M7TR5Z5KYANS7B10MR83BJS9",
+  "project_id": "01M7Q1C971BFK2HDPEYWC1WGRX",
+  "folder_id": "01M7Q1C9YNWWKDETCT84NYQFG4",
+  "org_id": "3439031",
+  "session_name": "a-welcome-coupon-typed-in-lowercase-welcome10-still-takes-10",
+  "executions": [
+    {
+      "execution_id": "81acd459-7464-42c2-be18-37d2cb6f9a10",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-19T20:41:15.764Z"
+    }
+  ]
+}
