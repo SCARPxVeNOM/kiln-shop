@@ -32,7 +32,9 @@ function cartLines(sid) {
 function cartTotals(sid, couponCode) {
   const lines = cartLines(sid);
   const subtotal = lines.reduce((sum, l) => sum + l.product.price * l.qty, 0);
-  const coupon = couponCode ? coupons[couponCode] : undefined;
+  // Coupon codes are case-insensitive: customers type them however they like.
+  const key = String(couponCode ?? '').trim().toUpperCase();
+  const coupon = key && Object.hasOwn(coupons, key) ? coupons[key] : undefined;
   const discount = coupon ? Math.round((subtotal * coupon.percent) / 100) : 0;
   const shipping = subtotal > 0 && subtotal < 6000 ? 600 : 0;
   return { lines, subtotal, discount, shipping, total: subtotal - discount + shipping, coupon };

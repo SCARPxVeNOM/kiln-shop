@@ -1,0 +1,61 @@
+{
+  "id": "BUG-001",
+  "title": "welcome coupon typed in lowercase (welcome10) still takes 10% off at checkout",
+  "origin": "capture",
+  "status": "fixed",
+  "severity": "high",
+  "confidence": 0.98,
+  "flowId": "regression/a-welcome-coupon-typed-in-lowercase-welcome10-still-takes-10",
+  "tags": [
+    "checkout",
+    "coupon"
+  ],
+  "report": {
+    "source": "github",
+    "ref": "#1",
+    "url": "https://github.com/SCARPxVeNOM/kiln-shop/issues/1",
+    "text": "Coupon code welcome10 doesn't work at checkout\n\nHi Kiln team,\n\nI typed welcome10 into the coupon box at checkout but it just says \"That coupon code is not valid\". The newsletter said it was 10% off my first order. I tried twice.\n\nYou can reach me on [redacted-phone] if you need anything.\n\nPriya"
+  },
+  "failingStep": "Check the expected outcome",
+  "reason": "Checkpoint assertion failed: \"the message under the \"Coupon code\" field reads \"10% welcome discount applied.\"\"",
+  "verdict": {
+    "confirmed": true,
+    "family": "application_issue",
+    "category": "validation_defect",
+    "severity": "major",
+    "confidence": 0.98,
+    "title": "Valid welcome10 coupon is rejected at checkout",
+    "oneLiner": "Checkout rejects the valid welcome10 coupon instead of applying the 10% welcome discount.",
+    "rootCause": "The checkout treated the lowercase code welcome10 as invalid, so it did not apply the discount or update the order total.",
+    "suggestion": "Check the coupon validation rules and test data for welcome10, then confirm that applying it shows the success message, a $6.40 discount, and a $57.60 total."
+  },
+  "runs": [
+    "RUN-20261120-020623-ba065d",
+    "RUN-20261120-020943-3145f0"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "at": "2026-11-19T20:39:23.521Z",
+      "agent": "claude-code",
+      "promptFile": ".gremlin/bugs/BUG-001/attempt-1.md",
+      "changedFiles": [
+        "server.js"
+      ],
+      "outsideArea": [],
+      "blocked": [],
+      "result": "passed",
+      "durationS": 18.3,
+      "agentSummary": "I fixed the coupon check in `server.js`, but haven't run the app or Kane, as the rules say.\n\n**Root cause:** `cartTotals` in `server.js` looked up the code exactly as typed, but the shop's coupon list only has the uppercase key `WELCOME10`. So `welcome10` found nothing, and checkout showed \"That coupon code is not valid.\"\n\n**Fix:** `cartTotals` now trims the code and converts it to uppercase before looking it up. It also only matches codes that are actually in the coupon list. Both the Apply button and order placement go through this function, so a lowercase code is now accepted in both places. On the $64.00 Ember Vase that means $6.40 off and a $57.60 total, and the coupon field keeps showing `welcome10` in lowercase. The fix is all in `server.js`.",
+      "runId": "RUN-20261120-020943-3145f0",
+      "relatedRuns": [
+        "RUN-20261120-021131-ffd066",
+        "RUN-20261120-021150-4d5472"
+      ]
+    }
+  ],
+  "createdAt": "2026-11-19T20:39:17.146Z",
+  "updatedAt": "2026-11-19T20:42:07.654Z",
+  "credits": 52.44,
+  "fixedAt": "2026-11-19T20:42:07.654Z"
+}
