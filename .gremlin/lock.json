@@ -1,0 +1,19 @@
+{
+  "flows": {
+    "happy/search-the-shop": {
+      "hash": "b354afb3bf2036a8",
+      "approvedAt": "2026-11-18T10:32:04.711Z",
+      "by": "first pass"
+    },
+    "happy/buy-a-mug": {
+      "hash": "245c9400c9533864",
+      "approvedAt": "2026-11-18T10:34:32.374Z",
+      "by": "first pass"
+    },
+    "happy/coupon-at-checkout": {
+      "hash": "e7c8b3c406e2f71d",
+      "approvedAt": "2026-11-18T10:36:22.144Z",
+      "by": "first pass"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "test_id": "0faa2452-7a0c-4f08-b4fc-749512235c22",
+  "project_id": "01M7Q1C971BFK2HDPEYWC1WGRX",
+  "folder_id": "01M7Q1C9YNWWKDETCT84NYQFG4",
+  "org_id": "3439031",
+  "session_name": "coupon-at-checkout",
+  "commit_id": "aa0a8456-42a8-4111-ba81-673cc2fb1ee4",
+  "testcase_id": "01M7Q3HZBXB3QWMQZ17VTV02ZK",
+  "executions": [
+    {
+      "execution_id": "0abd729d-a0e7-419f-aba5-713bed7742e5",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-18T10:36:05.450Z"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Gremlin: local run artifacts (flows, lock, bugs and Kane recordings are committed)
+runs/
+evidence/
+reports/
+events.jsonl
+state.json
+ledger.jsonl
+stats.json
+kane/.testmuai/

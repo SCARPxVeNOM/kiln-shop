@@ -1,0 +1,11 @@
+{
+  "name": "kiln-shop",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A tiny ceramics shop, used as Gremlin's demo target.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}

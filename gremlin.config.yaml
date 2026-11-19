@@ -1,0 +1,48 @@
+# Gremlin: a hostile user, a perfect bug memory, your own agent as the fixer, Kane CLI as the referee.
+# Docs: https://github.com/SCARPxVeNOM/gremlin
+
+app:
+  name: "Kiln"
+  url: http://localhost:4000
+  start: "node server.js"        # Gremlin starts the shop with this when it isn't running
+  reset: POST /__reset           # fresh cart and orders before every run
+  production: false              # Gremlin refuses to run against production
+
+platforms: [web]
+
+# Kiln has no accounts: everyone shops as a guest.
+personas: {}
+
+agent:
+  name: claude-code              # claude-code | codex | cursor | gemini | custom | none
+
+loop:
+  mode: approve                  # suggest | approve | autonomous
+  attempts: 3                    # fix attempts before Gremlin hands the bug to a human
+
+guard:
+  trigger: [agent-finish, pr]
+  fallback: all
+  areas:
+    checkout: ["server.js", "public/app.js"]
+    cart: ["server.js", "public/app.js"]
+    search: ["server.js"]
+    catalog: ["server.js", "data.js"]
+
+breaker:
+  scope: []
+  avoid: [admin]
+  categories: [input, timing, navigation, state, accessibility]
+  max_flows: 6
+
+budget:                          # Kane credits
+  per_run: 600
+  per_day: 3000
+  per_bug: 600
+
+protected_paths: ["data.js"]     # the catalog is content, not code: the Fixer may not touch it
+
+kane:
+  headless: true
+  max_steps: 40
+  bug_detection: continue

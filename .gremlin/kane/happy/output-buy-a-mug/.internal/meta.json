@@ -1,0 +1,25 @@
+{
+  "test_id": "6c501b58-22d3-4f63-a16e-ecea65a0fa44",
+  "project_id": "01M7Q1C971BFK2HDPEYWC1WGRX",
+  "folder_id": "01M7Q1C9YNWWKDETCT84NYQFG4",
+  "org_id": "3439031",
+  "session_name": "buy-a-mug",
+  "commit_id": "0fcddf2b-2dd1-4c2d-80d8-c6703e9ec798",
+  "testcase_id": "01M7Q3DMH353XZPETNWT03RYDF",
+  "executions": [
+    {
+      "execution_id": "06a4f8f5-6c5c-4f39-a1b0-e1da8d65eb97",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-18T10:34:14.798Z"
+    },
+    {
+      "execution_id": "7fa98247-e9eb-45cd-a6f2-d84dedbc21f7",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-18T14:43:40.003Z"
+    }
+  ]
+}
