@@ -319,6 +319,7 @@ const api = {
       createdAt: new Date().toISOString(),
     };
     orders.push(order);
+    cartFor(sid).clear();
     // Let the fulfilment proxy route the receipt without parsing the body.
     res.setHeader('X-Order-Ref', `${order.id}:${order.name}`);
     send(res, 201, { id: order.id });

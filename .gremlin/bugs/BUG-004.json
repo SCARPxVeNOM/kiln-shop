@@ -1,0 +1,60 @@
+{
+  "id": "BUG-004",
+  "title": "My cart still has the mug after I placed the order",
+  "origin": "capture",
+  "status": "fixed",
+  "severity": "high",
+  "confidence": 0.020000000000000018,
+  "flowId": "regression/my-cart-still-has-the-mug-after-i-placed-the-order",
+  "tags": [],
+  "report": {
+    "source": "github",
+    "ref": "#5",
+    "url": "https://github.com/SCARPxVeNOM/kiln-shop/issues/5",
+    "text": "My cart still has the mug after I placed the order\n\nHi,\n\nI bought an Ash Glaze Mug: added it to the cart, checked out and got the \"Thank you\" page. But the cart icon at the top still shows 1, and when I open the cart the mug is still in it, so it looks like I could accidentally order it twice.\n\nI expected the cart to be empty once the order went through.\n\nThanks,\nMaya"
+  },
+  "failingStep": "Check the expected outcome",
+  "reason": "Checkpoint assertion failed: \"the page heading is \"Your cart\" and the page says \"Your cart is empty.\"\"",
+  "verdict": {
+    "confirmed": false,
+    "family": "automation_bug",
+    "category": "state_transition_bug",
+    "severity": "major",
+    "confidence": 0.98,
+    "title": "Empty-cart checkpoint ran with Ash Glaze Mug still in cart",
+    "oneLiner": "The empty-cart check ran while the cart still contained one Ash Glaze Mug.",
+    "rootCause": "The run reached the cart page without first removing the mug or resetting the cart. The page was in a populated-cart state, so it could not show the empty-cart message.",
+    "suggestion": "Reset the cart or remove all items before the checkpoint, then verify the cart badge is 0 before asserting the empty-cart heading and message."
+  },
+  "confirmedBy": {
+    "by": "SCARPxVeNOM",
+    "at": "2026-11-20T17:34:27.308Z",
+    "kane": "The empty-cart check ran while the cart still contained one Ash Glaze Mug."
+  },
+  "runs": [
+    "RUN-20261120-173046-174fe6",
+    "RUN-20261120-173439-9ea924"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "at": "2026-11-20T17:34:31.470Z",
+      "agent": "claude-code",
+      "promptFile": ".gremlin/bugs/BUG-004/attempt-1.md",
+      "changedFiles": [
+        "server.js"
+      ],
+      "outsideArea": [],
+      "blocked": [],
+      "result": "passed",
+      "durationS": 7.3,
+      "agentSummary": "The cause was in `POST /api/orders` in `server.js`. It saved the order but never emptied the session's cart. The cart page and the header count kept showing the mug after the \"Thank you\" page. I added `cartFor(sid).clear()` right after the order is stored, so the cart is empty once an order succeeds. I haven't run the app or the flow, as instructed.",
+      "runId": "RUN-20261120-173439-9ea924",
+      "relatedRuns": []
+    }
+  ],
+  "createdAt": "2026-11-20T17:34:27.309Z",
+  "updatedAt": "2026-11-20T17:36:13.175Z",
+  "credits": 106.91,
+  "fixedAt": "2026-11-20T17:36:13.175Z"
+}
