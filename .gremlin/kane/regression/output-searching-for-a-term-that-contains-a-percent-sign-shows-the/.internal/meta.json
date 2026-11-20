@@ -1,0 +1,32 @@
+{
+  "commit_id": "efd083d0-af53-49c9-a151-383df91cb9db",
+  "test_id": "3b89b3ab-97c7-41a9-8820-1cf8dafe23bf",
+  "testcase_id": "01M7WA6ASTQ7CBJJB3SZAEZECS",
+  "project_id": "01M7Q1C971BFK2HDPEYWC1WGRX",
+  "folder_id": "01M7Q1C9YNWWKDETCT84NYQFG4",
+  "org_id": "3439031",
+  "session_name": "searching-for-a-term-that-contains-a-percent-sign-shows-the",
+  "executions": [
+    {
+      "execution_id": "3b3361fb-d723-4b93-af51-cedab6f179f6",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T11:10:52.355Z"
+    },
+    {
+      "execution_id": "1594f15f-8dd8-47cd-8951-64115f31bc59",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T11:11:52.583Z"
+    },
+    {
+      "execution_id": "8af8652d-8ce0-4ac9-a320-5df9f05c6b16",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T11:13:01.902Z"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+diff --git a/server.js b/server.js
+index 3f2aed1..1deb31b 100644
+--- a/server.js
++++ b/server.js
+@@ -246,7 +246,7 @@ const pages = {
+     return layout(
+       sid,
+       `Search`,
+-      `<section class="narrow"><h1>Results for “${q}”</h1>
++      `<section class="narrow"><h1>Results for “${esc(q)}”</h1>
+   ${results.length ? `<section class="grid">${results.map(card).join('')}</section>` : '<p class="empty">Nothing matched. Try “mug” or “bowl”.</p>'}
+ </section>`,
+     );
+@@ -365,7 +365,7 @@ createServer(async (req, res) => {
+     if (url.pathname === '/cart') return html(res, 200, pages.cart(sid));
+     if (url.pathname === '/checkout') return html(res, 200, pages.checkout(sid));
+     if (url.pathname === '/orders') return html(res, 200, pages.orders(sid));
+-    if (url.pathname === '/search') return html(res, 200, pages.search(sid, decodeURIComponent(url.searchParams.get('q') ?? '')));
++    if (url.pathname === '/search') return html(res, 200, pages.search(sid, url.searchParams.get('q') ?? ''));
+     const product = /^\/product\/([\w-]+)$/.exec(url.pathname);
+     if (product) {
+       const page = pages.product(sid, product[1]);
