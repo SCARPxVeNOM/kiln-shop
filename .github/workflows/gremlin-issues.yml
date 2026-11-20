@@ -34,7 +34,7 @@ jobs:
       - uses: browser-actions/setup-chrome@v1
 
       - name: Install the app
-        run: npm install
+        run: npm install --no-package-lock
 
       - name: Reproduce, fix and prove issue #${{ github.event.issue.number }}
         uses: SCARPxVeNOM/gremlin@main
