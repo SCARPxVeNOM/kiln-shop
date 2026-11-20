@@ -1,0 +1,118 @@
+{
+  "id": "BUG-001",
+  "title": "Searching for a term that contains a percent sign shows the search results page, not an error page",
+  "origin": "capture",
+  "status": "fixed",
+  "severity": "high",
+  "confidence": 0.99,
+  "flowId": "regression/searching-for-a-term-that-contains-a-percent-sign-shows-the",
+  "tags": [
+    "search",
+    "catalog"
+  ],
+  "report": {
+    "source": "github",
+    "ref": "#3",
+    "url": "https://github.com/SCARPxVeNOM/kiln-shop/issues/3",
+    "text": "Search breaks when I search for 100% stoneware\n\nHi,\n\nI was looking for pieces that are fully stoneware, so I typed 100% stoneware into the search box and pressed Search. Instead of results I got an error page. Searching for just stoneware works fine.\n\nThanks,\nTom"
+  },
+  "failingStep": "Check the expected outcome",
+  "reason": "Checkpoint assertion failed: \"the page shows a heading that reads Results for “100% stoneware”\"",
+  "verdict": {
+    "confirmed": true,
+    "family": "application_issue",
+    "category": "functional_defect",
+    "severity": "major",
+    "confidence": 0.98,
+    "title": "Search page shows generic error for valid stoneware query",
+    "oneLiner": "Searching for “100% stoneware” shows an error page instead of search results or the expected no-results message.",
+    "rootCause": "The search page failed to load a valid query and displayed a generic error message rather than the required results state.",
+    "suggestion": "Investigate why the search request for “100% stoneware” reaches the generic error page, and ensure it instead renders the results heading plus product cards or the supported no-results message."
+  },
+  "runs": [
+    "RUN-20261120-163633-e0044c",
+    "RUN-20261120-163915-e48458",
+    "RUN-20261120-164114-90353a",
+    "RUN-20261120-164224-c372e9"
+  ],
+  "attempts": [
+    {
+      "n": 1,
+      "at": "2026-11-20T11:13:29.894Z",
+      "agent": "Claude Code (sonnet)",
+      "promptFile": ".gremlin/bugs/BUG-001/arena-package.md",
+      "changedFiles": [
+        "server.js"
+      ],
+      "outsideArea": [],
+      "blocked": [],
+      "agentSummary": "The cause was a second decode of the search query in `server.js`. `url.searchParams.get('q')` already returns the decoded value, `100% stoneware`. The code then ran `decodeURIComponent` on it again, and that call throws a `URIError` on the bare `%`, which gave the 500.\n\nI removed the extra `decodeURIComponent` call, so the route now passes the value from `searchParams` straight to `pages.search`. I haven't run the app or the flow, as instructed.",
+      "runId": "RUN-20261120-164114-90353a",
+      "relatedRuns": [
+        "RUN-20261120-164156-d2a489"
+      ],
+      "result": "passed",
+      "durationS": 11.2
+    }
+  ],
+  "createdAt": "2026-11-20T11:08:50.552Z",
+  "updatedAt": "2026-11-20T11:13:29.894Z",
+  "credits": 64.87,
+  "arena": {
+    "at": "2026-11-20T11:13:29.894Z",
+    "entries": [
+      {
+        "contender": "claude-code:opus",
+        "label": "Claude Code (opus)",
+        "changedFiles": [
+          "server.js"
+        ],
+        "added": 2,
+        "removed": 2,
+        "blocked": [],
+        "relatedRuns": [],
+        "result": "failed",
+        "durationS": 16.5,
+        "summary": "The search page crashed because the query was decoded twice. `url.searchParams.get('q')` already turns `100%25+stoneware` into `100% stoneware`, and then `server.js:368` ran `decodeURIComponent` on that result. A stray `%` that isn't followed by two hex digits makes it throw `URIError: URI malformed`, which the catch block turned into the 500 \"Something went wrong\" page.\n\nI removed the second decode in `server.js`. I also escaped the query in the \"Results for\" heading with the existing `esc()` helper, because it was being inserted into the HTML raw. That doesn't change how \"100% stoneware\" displays. I haven't run the app or the flow, as instructed; Kane's re-run will confirm the fix.",
+        "runId": "RUN-20261120-163915-e48458",
+        "note": "Checkpoint assertion failed: \"the page shows a heading that reads Results for “100% stoneware”\""
+      },
+      {
+        "contender": "claude-code:sonnet",
+        "label": "Claude Code (sonnet)",
+        "changedFiles": [
+          "server.js"
+        ],
+        "added": 1,
+        "removed": 1,
+        "blocked": [],
+        "relatedRuns": [
+          "RUN-20261120-164156-d2a489"
+        ],
+        "result": "won",
+        "durationS": 11.2,
+        "summary": "The cause was a second decode of the search query in `server.js`. `url.searchParams.get('q')` already returns the decoded value, `100% stoneware`. The code then ran `decodeURIComponent` on it again, and that call throws a `URIError` on the bare `%`, which gave the 500.\n\nI removed the extra `decodeURIComponent` call, so the route now passes the value from `searchParams` straight to `pages.search`. I haven't run the app or the flow, as instructed.",
+        "runId": "RUN-20261120-164114-90353a"
+      },
+      {
+        "contender": "claude-code:haiku",
+        "label": "Claude Code (haiku)",
+        "changedFiles": [
+          "server.js"
+        ],
+        "added": 2,
+        "removed": 2,
+        "blocked": [],
+        "relatedRuns": [
+          "RUN-20261120-164306-ee5671"
+        ],
+        "result": "passed",
+        "durationS": 14.4,
+        "summary": "The search page crashed on any `%` in the query, so \"100% stoneware\" returned the 500 error page. The cause was a double decode: `url.searchParams.get('q')` already percent-decodes the value, and the extra `decodeURIComponent` then threw a `URIError` on the stray `%`, which the catch block turned into the error page.\n\nI changed `server.js` in two places:\n- **Line 368:** removed the second `decodeURIComponent` call, so the search term is passed through as already decoded.\n- **Line 249:** the query is now passed through `esc()` before it goes into the \"Results for\" heading. This is beyond the reported crash, but the raw query was being written into HTML unescaped.\n\nI did not run the app, Gremlin or Kane, per the session rules.",
+        "runId": "RUN-20261120-164224-c372e9"
+      }
+    ],
+    "winner": "claude-code:sonnet"
+  },
+  "fixedAt": "2026-11-20T11:13:29.894Z"
+}

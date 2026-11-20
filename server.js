@@ -365,7 +365,7 @@ createServer(async (req, res) => {
     if (url.pathname === '/cart') return html(res, 200, pages.cart(sid));
     if (url.pathname === '/checkout') return html(res, 200, pages.checkout(sid));
     if (url.pathname === '/orders') return html(res, 200, pages.orders(sid));
-    if (url.pathname === '/search') return html(res, 200, pages.search(sid, decodeURIComponent(url.searchParams.get('q') ?? '')));
+    if (url.pathname === '/search') return html(res, 200, pages.search(sid, url.searchParams.get('q') ?? ''));
     const product = /^\/product\/([\w-]+)$/.exec(url.pathname);
     if (product) {
       const page = pages.product(sid, product[1]);
