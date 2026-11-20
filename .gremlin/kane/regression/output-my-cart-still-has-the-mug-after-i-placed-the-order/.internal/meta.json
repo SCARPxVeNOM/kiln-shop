@@ -1,0 +1,18 @@
+{
+  "commit_id": "54e3c811-9423-48f6-9c95-4fe8e20d032f",
+  "test_id": "66e4c84f-c3d8-4c95-ae0c-c362adf8de36",
+  "testcase_id": "01M7X05HNZ6QQ7ENNJ6NBAP1GS",
+  "project_id": "01M7Q1C971BFK2HDPEYWC1WGRX",
+  "folder_id": "01M7Q1C9YNWWKDETCT84NYQFG4",
+  "org_id": "3439031",
+  "session_name": "my-cart-still-has-the-mug-after-i-placed-the-order",
+  "executions": [
+    {
+      "execution_id": "95755ed2-ff7c-4fa8-8cd6-177dfa448166",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-11-20T17:36:06.892Z"
+    }
+  ]
+}
