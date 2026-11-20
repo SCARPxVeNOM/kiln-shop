@@ -18,7 +18,8 @@ concurrency:
 
 jobs:
   autopilot:
-    if: github.event.label.name == 'gremlin'
+    # gremlin:confirmed: a human settles a disagreement between Kane and the agent
+    if: github.event.label.name == 'gremlin' || github.event.label.name == 'gremlin:confirmed'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
