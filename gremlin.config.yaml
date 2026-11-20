@@ -46,3 +46,7 @@ kane:
   headless: true
   max_steps: 40
   bug_detection: continue
+contracts:                 # product rules Kane checks at the end of every flow they apply to
+  - Every product price, and every amount in a cart or order summary, is shown in US dollars with two decimals, like $28.00 (shipping may say Free)
+  - rule: Once an order is confirmed, the cart count at the top right of the page shows 0
+    tags: [cart]

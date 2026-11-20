@@ -1,0 +1,36 @@
+{
+  "id": "BUG-002",
+  "title": "Cart badge remains nonzero after order confirmation",
+  "origin": "guard",
+  "status": "confirmed",
+  "severity": "medium",
+  "confidence": 0.97,
+  "flowId": "happy/buy-a-mug",
+  "tags": [
+    "checkout",
+    "cart"
+  ],
+  "failingStep": "Product rule 2: Once an order is confirmed, the cart count at the top right of the page shows 0",
+  "contract": "Once an order is confirmed, the cart count at the top right of the page shows 0",
+  "reason": "Final verification failed: \"once an order is confirmed, the cart count at the top right of the page shows 0\"",
+  "verdict": {
+    "confirmed": true,
+    "family": "application_issue",
+    "category": "ui_state_mismatch",
+    "severity": "minor",
+    "confidence": 0.97,
+    "title": "Cart badge remains nonzero after order confirmation",
+    "oneLiner": "The order is confirmed, but the cart count in the top-right badge still shows 1 instead of 0.",
+    "rootCause": "After the order was completed, the page did not clear or refresh the cart count shown in the header.",
+    "suggestion": "Update the cart badge immediately after a successful order so it shows 0 on the confirmation page."
+  },
+  "runs": [
+    "RUN-20261120-172230-7ea4a1",
+    "RUN-20261120-172943-b0b3ed",
+    "RUN-20261120-173710-f3d80d"
+  ],
+  "attempts": [],
+  "createdAt": "2026-11-20T11:56:14.698Z",
+  "updatedAt": "2026-11-20T12:09:14.665Z",
+  "credits": 21.76
+}

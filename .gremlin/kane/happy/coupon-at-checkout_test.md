@@ -21,3 +21,6 @@ Type WELCOME10 into the coupon code field and click "Apply".
 ## Check the expected outcome
 Verify that A message says the 10% welcome discount was applied.
 Verify that the order summary shows a discount of $6.40.
+
+## Product rule 1: Every product price, and every amount in a cart or order summary, is shown in US dollars…
+Without leaving this page, verify that every product price, and every amount in a cart or order summary, is shown in US dollars with two decimals, like $28.00 (shipping may say Free). If nothing on this page falls under this rule, it holds.

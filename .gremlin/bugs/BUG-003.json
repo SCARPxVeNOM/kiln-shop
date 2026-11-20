@@ -1,0 +1,35 @@
+{
+  "id": "BUG-003",
+  "title": "Search finds products by name (broke)",
+  "origin": "guard",
+  "status": "rejected",
+  "severity": "medium",
+  "confidence": 0.040000000000000036,
+  "flowId": "happy/search-the-shop",
+  "tags": [
+    "search",
+    "catalog"
+  ],
+  "failingStep": "Check the product rules",
+  "contract": "Every product price, line total, subtotal, discount and order total is shown in US dollars with two decimals, like $28.00",
+  "reason": "Final verification failed: \"every product price, line total, subtotal, discount and order total is shown in US dollars with two decimals, like $28.00\"",
+  "verdict": {
+    "confirmed": false,
+    "family": "automation_bug",
+    "category": "state_transition_bug",
+    "severity": "minor",
+    "confidence": 0.96,
+    "title": "Price-formatting check ran before cart totals were available",
+    "oneLiner": "The check was run on a search-results page, where only product prices were visible and no line totals, subtotal, discount, or order total existed to verify.",
+    "rootCause": "The run stopped after opening search results instead of moving to a cart or order page that shows all of the required money fields.",
+    "suggestion": "Update the test flow to add an item and open the cart or checkout before checking line totals, subtotal, discounts, and the order total."
+  },
+  "runs": [
+    "RUN-20261120-173252-87605f"
+  ],
+  "attempts": [],
+  "createdAt": "2026-11-20T12:05:06.670Z",
+  "updatedAt": "2026-11-20T12:07:01.244Z",
+  "credits": 22.27,
+  "rejectedBecause": "Not a product bug: Kane failed the search page on a price rule that listed subtotals and totals, which a search page doesn't have. The rule was worded too broadly; Gremlin now tells Kane a rule holds when nothing on the page falls under it."
+}

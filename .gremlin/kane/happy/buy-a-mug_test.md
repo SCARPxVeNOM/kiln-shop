@@ -27,3 +27,9 @@ Click "Place order".
 ## Check the expected outcome
 Verify that an order confirmation page says "Thank you, Sam Rivera!".
 Verify that the confirmation shows an order number.
+
+## Product rule 1: Every product price, and every amount in a cart or order summary, is shown in US dollars…
+Without leaving this page, verify that every product price, and every amount in a cart or order summary, is shown in US dollars with two decimals, like $28.00 (shipping may say Free). If nothing on this page falls under this rule, it holds.
+
+## Product rule 2: Once an order is confirmed, the cart count at the top right of the page shows 0
+Without leaving this page, verify that once an order is confirmed, the cart count at the top right of the page shows 0. If nothing on this page falls under this rule, it holds.
